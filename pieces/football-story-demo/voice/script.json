@@ -1,0 +1,35 @@
+{
+  "lead": 0.45,
+  "tail": 1.1,
+  "lines": [
+    {
+      "id": "hook",
+      "text": "Everyone remembers when Manchester United were the most feared club on the planet.",
+      "file": "1-hook.wav",
+      "after": 0.25
+    },
+    {
+      "id": "legends",
+      "text": "Ferguson, Scholes, Giggs, Ronaldo, Rooney, trebles, titles, Champions League nights that made the whole world stop.",
+      "file": "2-legends.wav",
+      "after": 0.5
+    },
+    {
+      "id": "midtable",
+      "text": "Now in 2026, they are sitting mid-table, getting booed off their own pitch, and their manager is fighting for his job before October.",
+      "file": "3-midtable.wav",
+      "after": 0.45
+    },
+    {
+      "id": "fall",
+      "text": "How did the biggest club in England fall this far, this fast?",
+      "file": "4-fall.wav",
+      "after": 0.4
+    },
+    {
+      "id": "series",
+      "text": "Stay with us, because this 10-part series is going to break down every single reason United are where they are today. And trust me, some of it will shock you.",
+      "file": "5-series.wav"
+    }
+  ]
+}

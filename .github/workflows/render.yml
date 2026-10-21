@@ -1,0 +1,46 @@
+name: Render Motion Graphics Short
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "pieces/**"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund playwright@1.64.1
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build animation
+        run: node plugins/animate/skills/animate/tools/build.mjs pieces/football-story-demo
+
+      - name: Render video
+        run: node plugins/animate/skills/animate/tools/export.mjs pieces/football-story-demo --formats 9:16
+
+      - name: Upload rendered video
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-video
+          path: pieces/football-story-demo/renders/final.mp4
+          if-no-files-found: error

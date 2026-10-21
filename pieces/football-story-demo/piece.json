@@ -1,0 +1,10 @@
+{
+  "name": "football-story-demo",
+  "title": "Manchester United: how the giants fell",
+  "format": { "width": 1080, "height": 1920, "fps": 24, "bpm": 120, "duration": 35.399, "frames": 850 },
+  "formats": ["9:16"],
+  "storyFormat": "voice-led Tifo explainer, five script beats",
+  "style": "football-tifo",
+  "voice": { "file": "voice/voice.wav", "music": -14 },
+  "review": { "safe": { "top": 240, "bottom": 420, "right": 140 }, "refs": {} }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manchester United — how the giants fell</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0b0b0d; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { height: min(100vh, calc(100vw * 16 / 9)); width: auto; aspect-ratio: 9 / 16; display: block; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+"use strict";
+// =====================================================================
+//  MANCHESTER UNITED — "how the giants fell" (9:16, voice-led, 24fps)
+//  A Tifo-style explainer: five spoken script beats, yellow captions that
+//  pop word by word on the voice, poster-colored backgrounds, trophy
+//  cutouts, legend silhouette badges, a 2026 mid-table card, trend arrows
+//  and a PART 1 / 10 series badge. Cues come from the SCRIPT in
+//  src/scenes.js (timed by tools/voice.mjs -> voice.json -> VOICE).
+// =====================================================================
+const FPS = 24, W = 1080, H = 1920;
+const BPM = 120, BEAT = 60 / BPM, E8 = BEAT / 2, E16 = BEAT / 4;
+const DURATION = typeof VOICE !== 'undefined' && VOICE.duration ? VOICE.duration : 35.4;
+const NFRAMES = Math.round(DURATION * FPS);
+const LOOP_T = NFRAMES / FPS;
+const SAFE = { top: 240, bottom: 420, right: 140 };
+const CX = W / 2;
+
+const ERA_LIST = [[0, DURATION, () => sceneStory()]];
+const SHOTS = [
+  ['hook',     0,  0.45,  4.99, 'the feared era'],
+  ['legends',  0,  5.24, 13.11, 'ferguson and the legends'],
+  ['midtable', 0, 13.61, 21.31, '2026: mid-table'],
+  ['fall',     0, 21.76, 25.39, 'how did it happen'],
+  ['series',   0, 25.79, 34.30, 'ten-part series'],
+];
+const TIMELINE = {
+  width: W, height: H, fps: FPS, bpm: BPM, duration: DURATION, frames: NFRAMES, loop: LOOP_T, safe: SAFE,
+  format: 'morph-chain',
+  shots: SHOTS.map(([key, era, t0, t1, title], i) => ({ id: i + 1, key, era, t0, t1, title })),
+  cuts: [],
+  morphs: [],
+  cues: {},
+  acts: [
+    { name: 'Glory', role: 'build', t0: 0.0, t1: 5.24 },
+    { name: 'Legends', role: 'build', t0: 5.24, t1: 13.61 },
+    { name: 'Fall', role: 'turn', t0: 13.61, t1: 25.79 },
+    { name: 'Series', role: 'payoff', t0: 25.79, t1: DURATION },
+  ],
+  board: [],
+  narration: [],
+};
+window.TIMELINE = TIMELINE;
